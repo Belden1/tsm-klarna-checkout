@@ -10,10 +10,17 @@ app.get('/', async (req, res) => {
 	const markup = products
 		.map(
 			(p) =>
-				`<a style="display: block; color: black; border: solid 2px black; margin: 20px; padding: 10px;" href="/product/${p.id}">${p.title} - ${p.price} kr</a>`
+				`<div style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; flex: 0 0 calc(200px - 20px); margin: 10px; padding: 15px; border: 1px solid #ccc; text-align: center;">
+					<p style="font-size: 16px; font-weight: bold; padding: 0; margin: 0;">${p.title}</p>
+					<div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+						<p style="font-size: 14px; color: #888; padding: 0; margin: 10px 0 0 0;">${p.price} kr</p>
+						<button style="border: 1px solid black; border-radius: 6px; transition: border-radius 150ms; width: 64px; padding: 8px 0; background-color: white; font-size: 14px; color: black; cursor: pointer; margin-top: 10px;" onmouseover="this.style.borderRadius='10px'" onmouseout="this.style.borderRadius='6px'" onclick="window.location.href='/product/${p.id}'">Köp</button>
+					</div>
+				</div>`
 		)
 		.join(' ');
-	res.send(markup);
+	const wrapperMarkup = `<div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center;">${markup}</div>`;
+	res.send(wrapperMarkup);
 });
 
 app.get('/product/:id', async function (req, res) {
