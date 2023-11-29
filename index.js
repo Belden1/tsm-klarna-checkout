@@ -1,5 +1,5 @@
 import { getProducts, getProduct } from './services/api.js';
-import { createOrder } from './services/klarna.js';
+import { createOrder, retrieveOrder } from './services/klarna.js';
 import express from 'express';
 const app = express();
 import { config } from 'dotenv';

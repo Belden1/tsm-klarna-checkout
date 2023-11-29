@@ -68,4 +68,22 @@ export async function createOrder(product) {
 }
 
 // Retrieve a order at Klarna
-export async function retrieveOrder(order_id) {}
+export async function retrieveOrder(order_id) {
+	const path = '/checkout/v3/orders/' + order_id;
+	const auth = getKlarnaAuth();
+
+	const url = process.env.BASE_URL + path;
+	const method = 'GET';
+	const headers = { Authorization: auth };
+	const response = await fetch(url, { method, headers });
+
+	if (response.status === 200 || response.status === 201) {
+		const jsonResponse = await response.json();
+		return jsonResponse;
+	} else {
+		console.error('ERROR: ', response.status, response.statusText);
+		return {
+			html_snippet: `<p>${response.status} ${response.statusText}</p>`
+		};
+	}
+}
