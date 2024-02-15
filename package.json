@@ -1,23 +1,23 @@
 {
-	"name": "tsm-klarna-checkout",
-	"version": "1.0.0",
-	"description": "",
-	"main": "index.js",
-	"engines": {
-		"node": "18.x"
-	},
-	"type": "module",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "node index.js",
-		"dev": "nodemon index.js"
-	},
-	"author": "Kristopher Hellsten",
-	"license": "ISC",
-	"dependencies": {
-		"dotenv": "^16.0.3",
-		"express": "^4.18.2",
-		"node-fetch": "^3.3.0",
-		"nodemon": "^2.0.21"
-	}
+  "name": "tsm-klarna-checkout",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "18.x"
+  },
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "Kristopher Hellsten",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "node-fetch": "^3.3.0",
+    "nodemon": "^2.0.21"
+  }
 }
