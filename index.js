@@ -5,21 +5,76 @@ const app = express();
 import { config } from 'dotenv';
 config();
 
+const style = `<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    font-size: 1.75rem;
+  }
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 1rem 0;
+    background-color: hsl(216, 12%, 8%);
+    color: hsl(0, 0%, 100%);
+  }
+  .container {
+    max-width: 850px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .card {
+    width: 100%;
+    background-color: hsl(213, 19%, 18%);
+    border-radius: 1.5rem;
+  }
+  .card p {
+    text-align: center;
+    margin: 1rem 3rem;
+  }
+  .price {
+    color: hsl(217, 12%, 63%);
+    font-size: 1.25rem
+  }
+  .btn {
+    display: flex;
+    justify-content: center;
+    margin: 1rem auto;
+    border: none;
+    border-radius: 0.5rem;
+    transition: border-radius 150ms;
+    width: 5rem;
+    padding: 0.75rem 0;
+    background-color: hsl(25, 97%, 53%);
+    color: hsl(0, 0%, 100%);
+  }
+  .btn:hover {
+    border-radius: 1.25rem;
+    background-color: hsl(0, 0%, 100%);
+    color: hsl(25, 97%, 53%);
+  }
+</style>`;
+
 app.get('/', async (req, res) => {
   const products = await getProducts();
   const markup = products
     .map(
       (p) =>
-        `<div style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; flex: 0 0 calc(200px - 20px); margin: 10px; padding: 15px; border: 1px solid #ccc; text-align: center;">
-					<p style="font-size: 16px; font-weight: bold; padding: 0; margin: 0;">${p.title}</p>
-					<div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-						<p style="font-size: 14px; color: #888; padding: 0; margin: 10px 0 0 0;">${p.price} kr</p>
-						<button style="border: 1px solid black; border-radius: 6px; transition: border-radius 150ms; width: 64px; padding: 8px 0; background-color: white; font-size: 14px; color: black; cursor: pointer; margin-top: 10px;" onmouseover="this.style.borderRadius='10px'" onmouseout="this.style.borderRadius='6px'" onclick="window.location.href='/product/${p.id}'">Köp</button>
-					</div>
-				</div>`
+        `<div class="card">
+          <p class="title">${p.title}</p>
+          <p class="price">${p.price} kr</p>
+          <button class="btn" onclick="window.location.href='/product/${p.id}'">
+            <strong>Buy</strong>
+          </button>
+        </div>`
     )
     .join(' ');
-  const wrapperMarkup = `<div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center;">${markup}</div>`;
+  const wrapperMarkup = `${style}<div class="container">${markup}</div>`;
   res.send(wrapperMarkup);
 });
 
